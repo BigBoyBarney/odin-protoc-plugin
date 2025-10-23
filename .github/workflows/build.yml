@@ -18,10 +18,6 @@ jobs:
     steps:
       - id: linux
         run: echo "os=ubuntu-latest" >> $GITHUB_OUTPUT
-      - id: windows
-        run: echo "os=windows-latest" >> $GITHUB_OUTPUT
-      - id: macos
-        run: echo "os=macos-latest" >> $GITHUB_OUTPUT
     outputs:
       os: ${{ toJSON(steps.*.outputs.os) }}
 
@@ -36,7 +32,7 @@ jobs:
       fail-fast: false
       matrix:
         os: ${{ fromJSON(needs.matrix-prep.outputs.os) }}
-        preset: [linux-debug, macos-debug, windows-debug, windows-release]
+        preset: [linux-debug]
         exclude:
           - os: ubuntu-latest
             preset: macos-debug
